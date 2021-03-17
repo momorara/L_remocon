@@ -1,6 +1,4 @@
 
-# なぜか　crontabに入れないので、sudo crontab -e -u pi　で入る。
-
 @reboot node-red-pi --max-old-space-size=256
 
 @reboot sudo pigpiod

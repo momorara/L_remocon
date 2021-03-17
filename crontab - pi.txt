@@ -12,7 +12,7 @@
 @reboot python3 /home/pi/L_remocon/irrp_data_code03.py   >irrp_data_code03_log.txt 2>&1
 
 # 学習リモコンのメインプログラム
-@reboot python3 /home/pi/L_remocon/remocon_mode03_02.py  >remocon_mode03_log.txt 2>&1
+@reboot python3 /home/pi/L_remocon/remocon_mode03_03.py  >remocon_mode03_log.txt 2>&1
 
 # 1分毎にラズパイのcpu温度、使用率をファィルに書く
 * * * * * python3 /home/pi/L_remocon/SaveInfoRaspi.py
@@ -22,7 +22,7 @@
 # logが溜まりすぎると心配なので、定期的に消す
 # 毎週月曜日21:** リネーム&作成
 30 21 * * 2 mv /home/pi/L_remocon/temp_data.txt                /home/pi/L_remocon/temp_data.bak
-30 21 * * 2 mv /home/pi/L_remocon/remocon_mode03_01_log.csv    /home/pi/L_remocon/remocon_mode03_01_log.bak
+30 21 * * 2 mv /home/pi/L_remocon/remocon_mode03_03_log.csv    /home/pi/L_remocon/remocon_mode03_03_log.bak
 30 21 * * 2 mv /home/pi/L_remocon/irrp_data_code03_log.csv     /home/pi/L_remocon/irrp_data_code03_log.bak
 
 30 21 * * 2 mv /home/pi/remocon_mode03_log.txt       /home/pi/remocon_mode03_log.bak

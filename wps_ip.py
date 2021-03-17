@@ -6,7 +6,7 @@ wps_set.py
 2021/01/11  作成開始
 2021/03/14  LED1対応
 
-test1
+test1test2
 scp -r wifi/*.py tk@192.168.68.122:/home/tk/wifi
 scp -r wifi/*.py pi@192.168.68.121:/home/pi/wifi
 scp -r wifi pi@192.168.68.107:/home/pi

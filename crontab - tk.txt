@@ -1,0 +1,32 @@
+
+@reboot node-red-pi --max-old-space-size=256
+
+@reboot sudo pigpiod
+
+@reboot python3 /home/tk/L_remocon/DS18B20.py            >DS18B20_log.txt 2>&1
+
+@reboot python3 /home/tk/L_remocon/irrp_data_code03.py   >irrp_data_code03_log.txt 2>&1
+
+@reboot python3 /home/tk/L_remocon/remocon_mode03.py  >remocon_mode03_log.txt 2>&1
+
+* * * * * python3 /home/tk/L_remocon/SaveInfoRaspi.py
+
+
+# logが溜まりすぎると心配なので、定期的に消す
+# 毎週月曜日21:** リネーム&作成
+30 21 * * 2 mv /home/tk/L_remocon/temp_data.txt                /home/tk/L_remocon/temp_data.bak
+30 21 * * 2 mv /home/tk/L_remocon/remocon_mode03_log.csv    /home/tk/L_remocon/remocon_mode03_log.bak
+30 21 * * 2 mv /home/tk/L_remocon/irrp_data_code03_log.csv     /home/tk/L_remocon/irrp_data_code03_log.bak
+
+30 21 * * 2 mv /home/tk/remocon_mode03_log.txt       /home/tk/remocon_mode03_log.bak
+
+
+
+
+
+
+
+
+
+
+

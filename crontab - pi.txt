@@ -28,3 +28,4 @@
 30 21 * * 2 mv /home/pi/remocon_mode03_log.txt                 /home/pi/remocon_mode03_log.bak
 
 #
+#

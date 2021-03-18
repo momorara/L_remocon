@@ -1,0 +1,73 @@
+ラズパイ設定
+
+常時運用することを考えるとzeroWHが妥当ですが、3B等でも動作します。
+
+
+1.最新OS Busterのインストール  10.4が必要
+	raspios_armhf-2021-01-12/	2021-01-12 15:28	-	 
+	https://downloads.raspberrypi.org/raspios_armhf/images/
+	から入手可能です。2021/2/18現在
+	これより新しいシステムでは動作確認できていません。
+
+2.wifiの設定をしてください。
+
+3.　　　　　　　　　　　　　　　
+
+4.インターフェースの設定
+　sudo raspi-configでinterface設定で
+　i2cを使用、1wireを使用にして下さい。
+　sudo nano /boot/config.txtとして
+  dtoverlay=w1-gpio-pullup,gpiopin=13　を最後の行に追加して下さい。
+
+5.ライブラリインストール
+　git clone https://github.com/adafruit/Adafruit_Python_SSD1306.git 
+　cd Adafruit_Python_SSD1306 
+　sudo python3 setup.py install
+　pip3 install Adafruit_GPIO 
+　sudo apt-get install fonts-ipafont -y
+　pip3 install timeout-decorator
+  sudo apt install pigpio python3-pigpio
+
+
+6.home/piの下に学習リモコンのフォルダーを置く
+　home/pi/L_remocon
+
+7.L_remocomに学習リモコンのファィルを配置
+　別途メールでお渡しするファィルをこのディレクトリに配置
+　もしくは、githubからのクローン
+　git clone https://github.com/momorara/L_remocon
+
+
+8.node-redの最新版をインストール
+
+以下のコマンドを実行し、
+bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
+インストール終了後、以下コマンドでnode-redを起動できます。
+node-red-pi --max-old-space-size=256
+
+
+9.パレットの管理にて以下を読み込み追加してください。
+　　node-red-contrib-calc
+　　node-red-dashboard
+
+10.node-redで以下のフローを読み込み、デブロイする
+　　リモコン学習送信_B_v1_01.txt、状態表示_v1_01.txt　タイマー予約_v1_04.txt
+　　*ユーザーpiでの使用を想定しています。
+　　 別のユーザーnameで使用する場合は各フローのユーザーnameの設定を変更する
+
+11.cronの設定
+　　crontab.txtの内容をcrontab -eにて設定
+　　*ユーザー pi での使用を想定しています。
+　　別のユーザーnameで使用する場合は修正してください。
+
+12.再起動
+
+13.ps ax|grep pythonとして起動しているプログラムを確認　以下の3つが動作していればOK 他にもあるが気にしない。
+  python3 /home/pi/L_remocon/remocon_mode03.py
+  python3 /home/pi/L_remocon/irrp_data_code03.py
+  python3 /home/pi/L_remocon/DS18B20.py
+
+以上までできれば、スマホでnode-redのUIが操作できると思います。
+http://{IPアドレス}:1880/ui/
+
+zeroの場合、電源投入から全てが動作するまで数分かかる場合があります。

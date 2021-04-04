@@ -80,7 +80,7 @@ iR_sensor = '4'
 beep = '6'
 beep2 = '18'
 
-# FILE=[path + 'oso']
+# FILE=[path + 'oso'] # Car mp3 と表記のあるリモコン
 # FILE=[path + 'ali'] # 黒地のaliリモコン
 FILE=[path + 'ali-w'] # 白地のaliリモコン
 

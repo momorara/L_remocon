@@ -41,6 +41,7 @@ irrp_data_code03.py
 2020/09/18  ユーザー名変更に対応
 2020/10/11  iR受信時にピープ音を鳴らす
 2021/03/14  LED,LED1のgpio設定が抜けていた
+2021/04/11  リモコンfileを自動選定する デフォルトは ali-w
 
 
 
@@ -52,6 +53,7 @@ scp -r remocon/irrp_data_code03.py pi@192.168.68.135:/home/pi/remocon
 scp -r aircontrol pi@192.168.68.131:/home/pi
 scp -r aircontrol tk@192.168.68.124:/home/tk
 scp -r L_remocon/irrp_data_code03.py pi@192.168.68.128:/home/pi/L_remocon
+scp -r L_remocon pi@192.168.68.126:/home/pi
 python3 irrp_data_code03.py
 """
 
@@ -83,6 +85,17 @@ beep2 = '18'
 # FILE=[path + 'oso'] # Car mp3 と表記のあるリモコン
 # FILE=[path + 'ali'] # 黒地のaliリモコン
 FILE=[path + 'ali-w'] # 白地のaliリモコン
+
+# リモコンfileを自動選定
+if os.path.exists(path + 'ali-w'):
+    FILE = [path + 'ali-w'] # 白地のaliリモコン
+else:
+    if os.path.exists(path + 'oso'):
+        FILE = [path + 'oso'] # osoのaliリモコン
+    else:
+        if os.path.exists(path + 'ali'):
+            FILE = [path + 'ali'] # 黒地のaliリモコン
+
 
 ###################log print#####################
 # 自身のプログラム名からログファイル名を作る

@@ -19,6 +19,15 @@
 　sudo nano /boot/config.txtとして
   dtoverlay=w1-gpio-pullup,gpiopin=13　を最後の行に追加して下さい。
 
+確認のため、lsmod コマンドでドライバが存在することを確認します。
+$ lsmod | grep w1
+w1_therm                3584  0
+w1_gpio                 3657  0
+wire                   25219  2 w1_gpio,w1_therm
+w1_gpio がない場合は、/boot/config.txt の記述が間違っていると思われます。
+w1_therm がない場合は、配線が間違っていると思われます。
+
+
 5.ライブラリインストール
 　git clone https://github.com/adafruit/Adafruit_Python_SSD1306.git 
 　cd Adafruit_Python_SSD1306 

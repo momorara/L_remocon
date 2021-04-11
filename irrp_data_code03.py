@@ -346,6 +346,7 @@ while True:
 
    # コマンドの数を数える   ": [
    command_n = receive.count('": [')
+   log_print('読み込んだfile ',FILE)
    log_print('読み込んだコマンドの数 ',command_n)
 
    # コマンドの数だけ反復

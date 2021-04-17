@@ -1,6 +1,14 @@
 
-# node-redを常駐させる
+# node-redを常駐させる 
+# ただし、シャットダウンに時間がかかるようになる?ので、実運用では systemctl を使う方が良い
 @reboot node-red-pi --max-old-space-size=256
+
+# 以下のコマンドを一度実行すれば良い
+# 起動する
+# sudo systemctl enable nodered.service
+# 起動しない
+# sudo systemctl disable nodered.service
+
 
 # pigpioをデーモンとして起動
 @reboot sudo pigpiod

@@ -23,3 +23,5 @@ Buster 10.4or10.9が必要となります。
 
 
 2022/01/09  noTemp用のリポジトリです。　
+
+git clone https://github.com/momorara/L_remocon でラズパイにダウンロードしてください。

@@ -28,7 +28,7 @@ air_set03 -> remocon_mode03_02.py-> remocon_mode03_03.py -> remocon_noTemp_01.py
             modeFile.txtで快眠制御をコントロールするため、モード追記になっているのを
             現在モードのみファィルに記録する形に変更
 2022/01/07  wifiだけでなく有線LANもipアドレス取得できるようにする。 
-
+2022/06/19  iR_command 改行を削除
 
 scp -r *.py pi@192.168.68.126:/home/pi/L_remocon
 
@@ -125,6 +125,7 @@ def cmd_read(mode='通常'):
                 return 'no_cmd'
             with open(path + 'iR_command.txt') as f:
                 cmd = f.read()
+                cmd = cmd.replace('\n', '')
             print('cmd=',cmd)
             if not cmd in ['0','1','2','3','4','5','6','7','8','9','ok','play','reload\n','reload']:
                 cmd = 'no_cmd' # 上記 以外は無視

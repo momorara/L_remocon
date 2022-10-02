@@ -25,3 +25,8 @@ Buster 10.4or10.9が必要となります。
 2022/01/09  noTemp用のリポジトリです。　
 
 git clone https://github.com/momorara/L_remocon でラズパイにダウンロードしてください。
+
+
+2022/10/02  プログラム修正　node-redのフローの一部を修正しました。
+            tvとlightがタイマー予約でリモコン信号が出ない不具合を改修しました。
+            

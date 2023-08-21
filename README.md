@@ -17,7 +17,7 @@
 ・ラズパイは付属しません。<br>
 
 <<使用方法>><br>
-git clone https://github.com/momorara/ <br>
+git clone https://github.com/momorara/L_remocon <br>
 でラズパイにダウンロードしてください。<br>
 インストールについては、インストール文書に従いインストールを行ってください。<br>
 

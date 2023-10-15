@@ -22,6 +22,10 @@
 # LED点灯管理
 @reboot sleep 30 && python3 /home/pi/L_remocon/LED_on.py
 
+# 二つのタクトスイッチを搭載した基板用のプログラム
+# リモコンの代わりをします。
+@reboot sleep 35 && python3 /home/pi/L_remocon/sw_read.py
+
 
 # 1分毎にラズパイのcpu温度、使用率をファィルに書く
 * * * * * python3 /home/pi/L_remocon/SaveInfoRaspi.py

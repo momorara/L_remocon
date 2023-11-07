@@ -78,6 +78,10 @@ pi.set_mode(LED1, pigpio.OUTPUT)
 pi.write(LED, 0)
 pi.write(LED1, 0)
 
+# R3をなくせるかもとプルダウン GPIOは整数でわぬす必要がある。
+pi.set_mode(22, pigpio.PUD_DOWN)
+pi.write(22, 0)
+
 ###################log print#####################
 # 自身のプログラム名からログファイル名を作る
 import sys

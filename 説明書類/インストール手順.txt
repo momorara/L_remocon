@@ -1,6 +1,9 @@
-ラズパイ設定
+ラズパイ設定. v0.3
 
-常時運用することを考えるとzeroWHが妥当ですが、3B等でも動作します。
+OSおよびnord-REDのバージョンアップにより動作環境が厳しくなり
+zeroWでは、Bullseye以上での動作が厳しく、Buster10.9での使用を推奨します。
+bullseye以上を使われる場合は、3B以上を使用してください。
+Zero2Wでの検証は今後の予定となります。
 
 
 1.imager1.8.1にて機種選択ののちbullseye Legacy をインストール
@@ -36,13 +39,18 @@ cd
 
 以下のコマンドを実行し、
 bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
-インストール終了後、以下コマンドでnode-redを起動できます。
-node-red-pi --max-old-space-size=256
+・何か聞いてくるけど、2回とも y で進める
+・少し時間がかかります。
+・最後に色々聞いてくるけど、そのままエンターかNoで良いと思います。
+・高度な使い方やセキュリティを高めたい人はyesだったりしますが、本基板を使うレベルでは不要と考えます。
 
 
 8.パレットの管理にて以下を読み込み追加してください。
-　　node-red-contrib-calc
-　　node-red-dashboard
+node-red-pi --max-old-space-size=256 としてnode-redを立ち上げて、
+ブラウザで「http://ipアドレス:1880/」としてnode-redの編集画面を開きます。
+そこで、パレットの管理で次の2つのノードを追加してください。
+node-red-dashboard	UI用のフロー
+node-red-contrib-calc	計算用のフロー
 
 9.node-redで以下のフローを読み込み、デブロイする
 　　flows.json

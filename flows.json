@@ -1739,7 +1739,7 @@
         "type": "mqtt out",
         "z": "5010b6a2.5a7b68",
         "name": "",
-        "topic": "testmqtt/remocon/cpuTemp996",
+        "topic": "testmqtt/remocon/cpuTemp995",
         "qos": "0",
         "retain": "",
         "broker": "e5a3bdc8.169cc",

@@ -42,6 +42,7 @@ bookwormでの検証はこれからです。<br>
 2024/07/28 bullseye 11.10 で動作確認しました。(on update) <br>
 2024/08/27 最新のNode-RED v4.0.2 Node.js v20.17.0で動作確認しました。<br>
 2024/10/14 bullseye 11.11 , Node-RED v4.0.5 , Node.js v20.18.0で動作確認しました。(on update)<br>
+2025/1/6 bullseye 11.11 , Node-RED v4.0.8 , Node.js v20.18.1で動作確認しました。<br>
 
 <<ライセンス>><br>
 使用しているライブラリについては、ライブラリ制作者のライセンス規定を参照ください。 <br>

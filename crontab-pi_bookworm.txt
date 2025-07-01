@@ -1,0 +1,45 @@
+# node-redを常駐させる 
+# ただし、シャットダウンに時間がかかるようになる?ので、実運用では systemctl を使う方が良>
+@reboot node-red-pi --max-old-space-size=256
+
+# 以下のコマンドを一度実行すれば良い
+# 起動する
+# sudo systemctl enable nodered.service
+# 起動しない
+# sudo systemctl disable nodered.service
+
+
+# pigpioをデーモンとして起動
+#@reboot sudo pigpiod
+@reboot sleep 10 && sudo systemctl start pigpiod
+
+# コマンド用リモコンの信号を受信し、コマンド名をファィルに
+@reboot sleep 20 && python /home/pi/L_remocon/irrp_data_code03.py  >irrp_data_code03_log.txt 2>&1
+
+# 学習リモコンのメインプログラム
+@reboot sleep 25 && /home/pi/V_Lremo/bin/python /home/pi/L_remocon/remocon_noTemp_03.py >remocon_noTemp_log.txt 2>&1
+
+# LED点灯管理
+@reboot sleep 30 && python /home/pi/L_remocon/LED_on.py
+
+# 二つのタクトスイッチを搭載した基板用のプログラム
+# リモコンの代わりをします。
+@reboot sleep 35 && python /home/pi/L_remocon/sw_read.py
+
+
+# 1分毎にラズパイのcpu温度、使用率をファィルに書く
+* * * * * python3 /home/pi/L_remocon/SaveInfoRaspi.py
+
+
+# logが溜まりすぎると心配なので、定期的に消す
+# 毎週月曜日21:** リネーム&作成
+30 21 * * 2 mv /home/pi/L_remocon/temp_data.txt                /home/pi/L_remocon/temp_d>
+30 21 * * 2 mv /home/pi/L_remocon/remocon_mode03_log.csv       /home/pi/L_remocon/remoco>
+30 21 * * 2 mv /home/pi/L_remocon/irrp_data_code03_log.csv     /home/pi/L_remocon/irrp_d>
+
+30 21 * * 2 mv /home/pi/remocon_noTemp_log.txt                 /home/pi/remocon_noTemp_l>
+
+
+
+
+

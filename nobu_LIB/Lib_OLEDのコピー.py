@@ -18,48 +18,45 @@ OLEDディスプレイへの表示
 2020/09/05  文字数に合わせてフォントサイズを調整します。
             font_sizeをnullで関数を読む
 
-2025/07/01  Bookworm用ライブラリとする
-            Adafruitも違うインストール方法
-            確認の必要があるが、bullseyeでも使用できるかも
 
 
+
+http://ytkyk.info/blog/2016/06/19/raspberry-pi%E3%81%A7128x64%E3%81%AEoled%E3%81%AB%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%82%92%E8%A1%A8%E7%A4%BA%E7%BE%8E%E5%92%B2%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88/
 
 **** 使用にあたっての設定ステップ ***
 
 1. i2cの設定
 2. i2cの確認
 3. SSD1306 のライブラリインストール
-仮想環境でインストールする
-pip install git+https://github.com/adafruit/Adafruit_CircuitPython_SSD1306.git
-pip install adafruit-circuitpython-busdevice
-pip install adafruit-circuitpython-ssd1306
 
-sudo apt-get install fonts-ipafont -y
-pip install timeout-decorator
-pip install ipget
+git clone https://github.com/adafruit/Adafruit_Python_SSD1306.git 
+cd Adafruit_Python_SSD1306 
+sudo python3 setup.py install
 
+フォントのインストール
+
+pip3 install Adafruit_GPIO 
+sudo apt-get install libopenjp2-7 
+sudo apt-get install libtiff5-dev 
+pip3 install pillow
 
 scp -r i2c_disp pi@192.168.68.127:/home/pi
 """
 
-import board
-import busio
-import adafruit_ssd1306
+import Adafruit_GPIO.SPI as SPI
+import Adafruit_SSD1306
 from PIL import Image, ImageDraw, ImageFont
 import unicodedata # 半角、全角の判定
 import time
-
-# I2C 初期化
-i2c = busio.I2C(board.SCL, board.SDA)
 
 def SSD1306(disp_str,disp_size=32,font_size=0):
 
     # Raspberry Pi pin configuration
     RST = 40
     if disp_size == 64:
-        disp = adafruit_ssd1306.SSD1306_I2C(128, 64, i2c) # 大きい方
+        disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST) # 大きい方
     else:
-        disp = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c) # 小さい方
+        disp = Adafruit_SSD1306.SSD1306_128_32(rst=RST) # 小さい方
 
 
     # 文字数に合わせてフォントサイズを調整する 半角、全角を認識します。
@@ -84,9 +81,10 @@ def SSD1306(disp_str,disp_size=32,font_size=0):
     """
 
     # Initialize library.
-    disp.fill(0)
+    disp.begin()
     # Clear display.
-    disp.show()
+    disp.clear()
+    disp.display()
     # Create blank image for drawing.
     # Make sure to create image with mode '1' for 1-bit color.
     width = disp.width
@@ -136,7 +134,7 @@ def SSD1306(disp_str,disp_size=32,font_size=0):
 
     # 実際に表示
     disp.image(image)
-    disp.show()
+    disp.display()
     
 
 def main():

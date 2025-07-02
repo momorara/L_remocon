@@ -4,7 +4,10 @@
 
 OSおよびnord-REDのバージョンアップにより動作環境が厳しくなり
 zeroWでは、動作が厳しく、3B以上を使用してください。
-Zero2Wでの検証は今後の予定となります。
+
+常時電源を入れて使う事、スペースの問題などからZero2W
+が、ベストな選択かもしれません。
+有線LANがあれば、Pi2Bも良いかも
 
 
 1.imager1.9.4にて機種選択ののちbookworm64bit をインストール
@@ -54,7 +57,7 @@ pip install ipget
 7.node-redの最新版をインストール
 
 以下のコマンドを実行し、
-bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
+
 ・何か聞いてくるけど、2回とも y で進める
 ・少し時間がかかります。
 ・最後に色々聞いてくるけど、そのままエンターかNoで良いと思います。

@@ -57,7 +57,7 @@ pip install ipget
 7.node-redの最新版をインストール
 
 以下のコマンドを実行し、
-
+bash <(curl -sL https://github.com/node-red/linux-installers/releases/latest/download/update-nodejs-and-nodered-deb)
 ・何か聞いてくるけど、2回とも y で進める
 ・少し時間がかかります。
 ・最後に色々聞いてくるけど、そのままエンターかNoで良いと思います。

@@ -1,6 +1,6 @@
 ラズパイ設定. v0.6 for bookworm
 
-ラズパイ5以外で、bookwormの使える機種を対象とします。
+ラズパイ5以外で、bookworm以降の使える機種を対象とします。
 
 OSおよびnord-REDのバージョンアップにより動作環境が厳しくなり
 zeroWでは、動作が厳しく、3B以上を使用してください。
@@ -12,7 +12,7 @@ zeroWでは、動作が厳しく、3B以上を使用してください。
 
 1.imager1.9.4にて機種選択ののちbookworm64bit をインストール
   インストール後、アップデート
-  BookWorm 12.11
+  BookWorm 12.12、Trixie 13.1
 
 2.wifiの設定をしてください。
 
@@ -50,6 +50,8 @@ sudo apt-get install fonts-ipafont -y
 pip install timeout-decorator
 pip install ipget
 
+sudo apt-get install fonts-dejavu
+sudo apt-get install fonts-ipafont
 
 6.home/piの下に学習リモコンのフォルダーをクローンする
 　git clone https://github.com/momorara/L_remocon

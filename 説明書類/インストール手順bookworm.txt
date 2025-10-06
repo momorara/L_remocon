@@ -42,11 +42,13 @@ rm -rf V_Lremo
 
 5.ライブラリインストール
 
+*** 不要かも
 pip install git+https://github.com/adafruit/Adafruit_CircuitPython_SSD1306.git
 pip install adafruit-circuitpython-busdevice
 pip install adafruit-circuitpython-ssd1306
-
 sudo apt-get install fonts-ipafont -y
+***
+
 pip install timeout-decorator
 pip install ipget
 

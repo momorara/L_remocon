@@ -7,6 +7,7 @@
 
             OLED 128*32専用です。
     v2.0
+2025/10/07  TrixieでL_remocon用に改造した
 """
 import smbus2
 from PIL import Image, ImageDraw, ImageFont

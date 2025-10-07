@@ -1,0 +1,121 @@
+ラズパイ設定. v1.0 for bookworm
+
+ラズパイ5以外で、bookworm以降の使える機種を対象とします。
+
+OSおよびnord-REDのバージョンアップにより動作環境が厳しくなり
+zeroWでは、動作が厳しく、3B以上を使用してください。
+
+常時電源を入れて使う事、スペースの問題などからZero2W
+が、ベストな選択かもしれません。
+有線LANがあれば、Pi2Bも良いかも
+
+
+1.imagerにて機種選択ののちbookworm64bit をインストール
+  インストール後、アップデート
+  BookWorm 12.12
+  Trixie 13.1
+
+2.wifiの設定をしてください。
+
+3.pigpioはインストール済みのようなので、
+　　sudo pigpio で確認し、入っていればインストールは不要です。
+　　pigpioがないとのメッセージが出た際にはインストールしてください。
+　　インストールされてない場合は、別途インストールしてください。　
+
+4.インターフェースの設定
+　sudo raspi-configでinterface設定で
+　i2cを使用にして下さい。
+
+4.1　仮想環境の設定
+sudo apt update
+sudo apt install python3-pip -y
+# システムのもつパッケージを共有しながら仮想環境を作る
+python3 -m venv V_Lremo --system-site-packages
+# 仮想環境に入る
+source V_Lremo/bin/activate
+
+# 仮想環境から抜ける方法
+deactivate
+# 仮想環境（venv）の削除方法
+rm -rf V_Lremo
+
+
+5.ライブラリインストール
+仮想環境に入った状態で
+
+pip install timeout-decorator
+pip install ipget
+
+仮想環境から抜ける
+deactivate
+
+sudo apt-get install fonts-ipafont -y
+sudo apt-get install fonts-dejavu
+
+
+6.home/piの下に学習リモコンのフォルダーをクローンする
+　git clone https://github.com/momorara/L_remocon
+
+7.node-redの最新版をインストール
+
+以下のコマンドを実行し、
+bash <(curl -sL https://github.com/node-red/linux-installers/releases/latest/download/update-nodejs-and-nodered-deb)
+・何か聞いてくるけど、2回とも y で進める
+・少し時間がかかります。
+・最後に色々聞いてくるけど、そのままエンターかNoで良いと思います。
+・高度な使い方やセキュリティを高めたい人はyesだったりしますが、本基板を使うレベルでは不要と考えます。
+
+
+8.パレットの管理にて以下を読み込み追加してください。
+node-red-pi --max-old-space-size=256 としてnode-redを立ち上げて、
+ブラウザで「http://ipアドレス:1880/」としてnode-redの編集画面を開きます。
+そこで、パレットの管理で次の2つのノードを追加してください。
+node-red-dashboard	UI用のフロー 非推奨と出るが気にせずに
+node-red-contrib-calc	計算用のフロー
+
+9.node-redで以下のフローを読み込み、デブロイする
+　　flows.json
+　　*ユーザーpiでの使用を想定しています。
+　　 別のユーザーnameで使用する場合は各フローのユーザーnameの設定を変更する
+
+11.cronの設定
+　　crontab-pi_bookworm.txtの内容をcrontab -eにて設定
+　　*ユーザー pi での使用を想定しています。
+　　別のユーザーnameで使用する場合は修正してください。
+
+　　cronでプログラムの起動を遅らせています。sleep 20など
+　　こうしないと、不完全な起動になり、GPIOの制御がおかしくなります。
+　　その結果最悪iRLEDが動作しっぱなしとなり、過電流でiRLEDが壊れます。
+　　兆候として、インジケータ用LEDが不自然に点滅し続けた場合は、iR用プラグを抜くか
+　　電源を落としてください。
+　　注)起動時にインジケータ用LEDが6回点滅するのは正常です。
+
+
+12.再起動
+　　
+
+13.ps ax|grep pythonとして起動しているプログラムを確認　以下の3つが動作していればOK 他にもあるが気にしない。
+  python3 /home/pi/L_remocon/remocon_noTemp_03.py 仮想環境で動作
+  python3 /home/pi/L_remocon/irrp_data_code03.py
+  python3 /home/pi/L_remocon/LED_on.py
+
+以上までできれば、スマホでnode-redのUIが操作できると思います。
+http://{IPアドレス}:1880/ui/
+
+
+14.pigpioの設定を変更する必要があります。
+　　bookwormでは必要、Trixieでは不要でしたが、リモコン信号がうまく出ない場合は
+　　やってみてください。
+
+　　sudo nano /lib/systemd/system/pigpiod.service で、pigpio起動設定を開き
+	ExecStart=/usr/bin/pigpio -l
+	を
+	ExecStart=/usr/bin/pigpio -l -t 0
+　　として再起動してください。
+
+
+Copyright (c) 2021 Takanobu Kawabata
+Released under the MIT license
+https://github.com/YukinobuKurata/YouTubeMagicBuyButton/blob/master/MIT-LICENSE.txt
+
+

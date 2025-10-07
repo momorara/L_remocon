@@ -1,0 +1,21 @@
+pigpioを手動インストールする方法
+
+
+✅ 1. 依存パッケージをインストール
+sudo apt update
+sudo apt install -y python3 python3-pip python3-setuptools python3-wheel git make gcc
+
+✅ 2. pigpioをGitHubから取得
+cd ~
+git clone https://github.com/joan2937/pigpio.git
+
+✅ 3. ビルド＆インストール
+cd pigpio
+make
+sudo make install
+cd
+
+これで /usr/local/bin/pigpiod などがインストールされます。
+
+✅ 4. デーモン起動
+sudo pigpiod

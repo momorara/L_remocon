@@ -1,0 +1,9 @@
+【使用ソフトウェアについて】
+
+本教材／ソフトウェアでは、以下のオープンソースソフトウェアを使用しています。
+
+- Python Standard Library（PSF License）
+- pigpio（Unlicense）
+- timeout_decorator（MIT License）
+
+また、一部の機能には自作ライブラリを使用しています。

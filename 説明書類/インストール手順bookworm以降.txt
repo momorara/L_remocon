@@ -1,4 +1,4 @@
-ラズパイ設定. v1.0 for bookworm
+ラズパイ設定. v1.1 for bookworm 以降
 
 ラズパイ5以外で、bookworm以降の使える機種を対象とします。
 
@@ -13,7 +13,7 @@ zeroWでは、動作が厳しく、3B以上を使用してください。
 1.imagerにて機種選択ののちbookworm64bit をインストール
   インストール後、アップデート
   BookWorm 12.12
-  Trixie 13.1
+  Trixie 13.7
 
 2.wifiの設定をしてください。
 
@@ -21,6 +21,8 @@ zeroWでは、動作が厳しく、3B以上を使用してください。
 　　sudo pigpio で確認し、入っていればインストールは不要です。
 　　pigpioがないとのメッセージが出た際にはインストールしてください。
 　　インストールされてない場合は、別途インストールしてください。　
+   別途 pigpioを手動インストール.txt を参照のこと
+　　　　　また、自動起動がcronでできない場合は、systemctlを使ってください。
 
 4.インターフェースの設定
 　sudo raspi-configでinterface設定で
@@ -59,12 +61,11 @@ sudo apt-get install fonts-dejavu
 7.node-redの最新版をインストール
 
 以下のコマンドを実行し、
-bash <(curl -sL https://github.com/node-red/linux-installers/releases/latest/download/update-nodejs-and-nodered-deb)
+bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
 ・何か聞いてくるけど、2回とも y で進める
 ・少し時間がかかります。
 ・最後に色々聞いてくるけど、そのままエンターかNoで良いと思います。
 ・高度な使い方やセキュリティを高めたい人はyesだったりしますが、本基板を使うレベルでは不要と考えます。
-
 
 8.パレットの管理にて以下を読み込み追加してください。
 node-red-pi --max-old-space-size=256 としてnode-redを立ち上げて、

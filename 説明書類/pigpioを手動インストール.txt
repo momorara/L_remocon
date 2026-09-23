@@ -13,9 +13,38 @@ git clone https://github.com/joan2937/pigpio.git
 cd pigpio
 make
 sudo make install
+sudo python3 setup.py install
 cd
 
 これで /usr/local/bin/pigpiod などがインストールされます。
 
 ✅ 4. デーモン起動
 sudo pigpiod
+
+cronで @reboot sudo pigpiod
+で起動できれば良いが、できない場合は
+
+cronの　 @reboot sudo pigpiod　を削除
+
+sudo nano /etc/systemd/system/pigpiod.service
+を開いて、中身がなければ、
+
+[Unit]
+Description=pigpio daemon
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/pigpiod
+ExecStop=/bin/killall pigpiod
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+を、入力し保存
+
+sudo systemctl daemon-reload
+sudo systemctl enable pigpiod
+
+とする。これで、pigpiodが自動起動される

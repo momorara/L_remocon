@@ -51,8 +51,10 @@ pip install ipget
 仮想環境から抜ける
 deactivate
 
+ライブラリを追加
 sudo apt-get install fonts-ipafont -y
 sudo apt-get install fonts-dejavu
+sudo apt install python3-pil
 
 
 6.home/piの下に学習リモコンのフォルダーをクローンする

@@ -26,6 +26,8 @@
 # リモコンの代わりをします。
 @reboot sleep 35 && python /home/pi/L_remocon/sw_read.py
 
+@reboot sleep 40 && python /home/pi/L_remocon/blynk.py
+
 
 # 1分毎にラズパイのcpu温度、使用率をファィルに書く
 * * * * * python3 /home/pi/L_remocon/SaveInfoRaspi.py

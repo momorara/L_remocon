@@ -2,6 +2,7 @@
 2026/10/18
 Blynkによるスマホからの制御を受信します。
 https://www.blynk.io
+2026/10/22  通信障害にとりあえず対応
 
 test_blynk.py にあなたのトークンを入れて、テストして、OKなら
 blynk.py にトークンを入れて再起動すれば、動作します。
@@ -58,9 +59,21 @@ def v2_write_handler(value):
             "off"
         ])
 
+# # メインループ
+# while True:
+#     if BLYNK_AUTH != 'Your_Token' :
+#         blynk.run()
+#     else:
+#         time.sleep(1)
+
 # メインループ
 while True:
-    if BLYNK_AUTH != 'Your_Token' :
-        blynk.run()
+    if BLYNK_AUTH != 'Your_Token':
+        try:
+            blynk.run()
+        except Exception as e:
+            print("Blynk通信エラー:", e)
+            print("5秒後に再試行します")
+            time.sleep(5)
     else:
         time.sleep(1)

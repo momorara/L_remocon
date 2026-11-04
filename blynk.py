@@ -18,7 +18,6 @@ import subprocess
 import time
 
 BLYNK_AUTH = 'Your_Token'  # Blynkの認証トークン
-BLYNK_AUTH = 'Z0KPeNnP6d3mYgAIKNtuWcnZUuqHJB_L' 
 
 # Blynkインスタンス
 blynk = None

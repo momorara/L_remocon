@@ -9,6 +9,7 @@ test_blynk.py にあなたのトークンを入れて、テストして、OKな�
 blynk.py にトークンを入れて再起動すれば、動作します。
 
 2026/11/04  エラー処理の強化
+            tokenをconfigに移した。
 
 pi/L_remocon用
 """
@@ -16,8 +17,10 @@ pi/L_remocon用
 import BlynkLib
 import subprocess
 import time
+import config
 
-BLYNK_AUTH = 'Your_Token'  # Blynkの認証トークン
+# Blynkの認証トークン configにあるので、あなたのトークンを設定してください。
+BLYNK_AUTH = config.token()
 
 # Blynkインスタンス
 blynk = None
